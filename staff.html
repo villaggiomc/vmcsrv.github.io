@@ -3,13 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staff | VillaggioMC</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Staff Team | VillaggioMC</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #f1c40f;
             --bg: #0a0a0a;
-            --card: rgba(255, 255, 255, 0.03);
+            --card: rgba(255, 255, 255, 0.04);
+            --founder: #f1c40f;
+            --admin: #e74c3c;
+            --dev: #5865F2;
+            --helper: #2ecc71;
         }
 
         body {
@@ -18,76 +23,96 @@
             background-image: radial-gradient(circle at top, #1a1a1a 0%, #0a0a0a 100%);
             color: white;
             margin: 0;
-            padding-bottom: 50px;
+            padding-bottom: 100px;
         }
 
         nav {
-            padding: 20px;
-            background: rgba(0,0,0,0.8);
+            padding: 25px 20px;
+            background: rgba(0,0,0,0.85);
             backdrop-filter: blur(15px);
             text-align: center;
             border-bottom: 2px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        nav a { color: white; text-decoration: none; margin: 0 20px; font-weight: 700; }
+        nav a { color: white; text-decoration: none; margin: 0 20px; font-weight: 700; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; }
         nav a:hover { color: var(--primary); }
 
-        .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
+        .container { max-width: 1100px; margin: 80px auto; padding: 0 30px; }
 
-        /* Stile Titoli Sezioni */
-        .section-title {
-            text-align: left;
-            border-bottom: 2px solid var(--primary);
-            display: inline-block;
-            padding-right: 50px;
-            margin: 60px 0 30px 0;
-            font-size: 1.8rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
+        /* TITOLI SEZIONI */
+        .rank-section {
+            margin-bottom: 100px; /* Grande spazio tra una sezione e l'altra */
         }
 
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .section-header h2 {
+            font-size: 1.6rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+            white-space: nowrap;
+        }
+
+        .section-header .line {
+            height: 2px;
+            flex: 1;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* GRID STAFF */
         .staff-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 0.5fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 0.3fr));
+            gap: 35px;
             justify-content: start;
         }
 
         .staff-card {
             background: var(--card);
-            padding: 25px 15px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
-            cursor: pointer;
-            transition: 0.3s;
+            border-radius: 25px;
+            padding: 40px 20px;
             text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: all 0.4s ease;
+            cursor: pointer;
         }
 
         .staff-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-12px);
+            background: rgba(255, 255, 255, 0.08);
             border-color: var(--primary);
-            background: rgba(241, 196, 15, 0.05);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
 
         .staff-card img {
             width: 140px;
             height: auto;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             filter: drop-shadow(0 10px 10px rgba(0,0,0,0.5));
         }
 
-        .staff-name { font-weight: 700; font-size: 1.1rem; }
+        .staff-name { font-size: 1.2rem; font-weight: 800; margin-bottom: 5px; }
+        .staff-role { font-size: 0.75rem; font-weight: 600; opacity: 0.5; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Popup Modale */
+        /* MODALE */
         .modal {
             display: none;
             position: fixed;
             top: 50%; left: 50%; transform: translate(-50%, -50%);
-            background: #151515;
-            padding: 40px;
-            border-radius: 30px;
-            border: 3px solid var(--primary);
+            background: #111;
+            padding: 50px;
+            border-radius: 35px;
+            border: 2px solid var(--primary);
             z-index: 2000;
             width: 90%; max-width: 400px;
             text-align: center;
@@ -99,58 +124,104 @@
             top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0,0,0,0.9);
             z-index: 1000;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
+        }
+
+        .btn-close {
+            background: var(--primary);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .staff-grid { justify-content: center; }
+            .section-header h2 { font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
 <nav>
-    <a href="index.html">HOME</a>
-    <a href="info.html">INFO</a>
-    <a href="staff.html">STAFF</a>
-    <a href="regolamento.html">REGOLAMENTO</a>
+    <a href="index.html">Home</a>
+    <a href="info.html">Info</a>
+    <a href="staff.html">Staff</a>
+    <a href="regolamento.html">Regole</a>
+    <a href="ban.html">Ban List</a>
 </nav>
 
 <div class="container">
-    
-    <div class="section-title">👑 Founder & Owners</div>
-    <div class="staff-grid">
-        <div class="staff-card" onclick="openModal('Game_Invicible26', 'FOUNDER #1', 'Il Fondatore principale e mente tecnica di VillaggioMC.')">
-            <img src="https://mc-heads.net/body/Game_Invicible26/right" alt="Game_Invicible26">
-            <div class="staff-name">Game_Invicible26</div>
+
+    <div class="rank-section">
+        <div class="section-header" style="color: var(--founder);">
+            <i class="fas fa-crown fa-2x"></i>
+            <h2>Founder & Owners</h2>
+            <div class="line"></div>
         </div>
-        <div class="staff-card" onclick="openModal('MarioGamerSuper', 'FOUNDER #2', 'Co-Fondatore e responsabile del coordinamento generale.')">
-            <img src="https://mc-heads.net/body/MarioGamerSuper/right" alt="MarioGamerSuper">
-            <div class="staff-name">MarioGamerSuper</div>
+        <div class="staff-grid">
+            <div class="staff-card" onclick="openModal('Game_Invicible26', 'FOUNDER #1', 'Il Fondatore principale. Gestisce la parte tecnica e lo sviluppo del server.')">
+                <img src="https://mc-heads.net/body/Game_Invicible26/right" alt="Game_Invicible26">
+                <div class="staff-name">Game_Invicible26</div>
+                <div class="staff-role">Proprietario</div>
+            </div>
+            <div class="staff-card" onclick="openModal('MarioGamerSuper', 'FOUNDER #2', 'Co-Fondatore. Si occupa della community e della gestione generale.')">
+                <img src="https://mc-heads.net/body/MarioGamerSuper/right" alt="MarioGamerSuper">
+                <div class="staff-name">MarioGamerSuper</div>
+                <div class="staff-role">Proprietario</div>
+            </div>
         </div>
     </div>
 
-    <div class="section-title">🛡️ Amministratori</div>
-    <div class="staff-grid">
-        <div class="staff-card" onclick="openModal('Francy', 'ADMIN', 'Gestore dello staff e supervisore delle dinamiche in-game.')">
-            <img src="https://mc-heads.net/body/Francy/right" alt="Francy">
-            <div class="staff-name">Francy</div>
+    <div class="rank-section">
+        <div class="section-header" style="color: var(--admin);">
+            <i class="fas fa-user-shield fa-2x"></i>
+            <h2>Amministrazione</h2>
+            <div class="line"></div>
+        </div>
+        <div class="staff-grid">
+            <div class="staff-card" onclick="openModal('Francy', 'ADMIN', 'Gestisce le segnalazioni e coordina le attività dei membri dello staff.')">
+                <img src="https://mc-heads.net/body/Francy/right" alt="Francy">
+                <div class="staff-name">Francy</div>
+                <div class="staff-role">Admin</div>
+            </div>
         </div>
     </div>
 
-    <div class="section-title">💻 Developers</div>
-    <div class="staff-grid">
-        <div class="staff-card" onclick="openModal('ManySteak5037', 'DISCORD DEV', 'Sviluppatore dei bot e dell\'infrastruttura Discord.')">
-            <img src="https://mc-heads.net/body/ManySteak5037/right" alt="ManySteak5037">
-            <div class="staff-name">ManySteak5037</div>
+    <div class="rank-section">
+        <div class="section-header" style="color: var(--dev);">
+            <i class="fas fa-code fa-2x"></i>
+            <h2>Sviluppatori</h2>
+            <div class="line"></div>
         </div>
-        <div class="staff-card" onclick="openModal('RIP_dna', 'DISCORD DEV', 'Sviluppatore esperto dedicato alla sicurezza della community.')">
-            <img src="https://mc-heads.net/body/RIP_dna/right" alt="RIP_dna">
-            <div class="staff-name">RIP_dna</div>
+        <div class="staff-grid">
+            <div class="staff-card" onclick="openModal('ManySteak5037', 'DISCORD DEV', 'Sviluppatore esperto di bot e integrazioni per il nostro Discord.')">
+                <img src="https://mc-heads.net/body/ManySteak5037/right" alt="ManySteak5037">
+                <div class="staff-name">ManySteak5037</div>
+                <div class="staff-role">Dev</div>
+            </div>
+            <div class="staff-card" onclick="openModal('RIP_dna', 'DISCORD DEV', 'Lavora allo sviluppo tecnico e alla sicurezza del network.')">
+                <img src="https://mc-heads.net/body/RIP_dna/right" alt="RIP_dna">
+                <div class="staff-name">RIP_dna</div>
+                <div class="staff-role">Dev</div>
+            </div>
         </div>
     </div>
 
-    <div class="section-title">✨ Helper Team</div>
-    <div class="staff-grid">
-        <div class="staff-card" onclick="openModal('serianwgf', 'SR. HELPER', 'Supporto avanzato per tutti i player del server.')">
-            <img src="https://mc-heads.net/body/serianwgf/right" alt="serianwgf">
-            <div class="staff-name">serianwgf</div>
+    <div class="rank-section">
+        <div class="section-header" style="color: var(--helper);">
+            <i class="fas fa-hands-helping fa-2x"></i>
+            <h2>Supporto</h2>
+            <div class="line"></div>
+        </div>
+        <div class="staff-grid">
+            <div class="staff-card" onclick="openModal('serianwgf', 'SR. HELPER', 'Sempre disponibile per aiutare i player e moderare la chat.')">
+                <img src="https://mc-heads.net/body/serianwgf/right" alt="serianwgf">
+                <div class="staff-name">serianwgf</div>
+                <div class="staff-role">Senior Helper</div>
+            </div>
         </div>
     </div>
 
@@ -158,11 +229,10 @@
 
 <div class="overlay" id="overlay" onclick="closeModal()"></div>
 <div class="modal" id="modal">
-    <h2 id="m-nome" style="color:var(--primary);"></h2>
-    <p id="m-ruolo" style="font-weight:800; opacity:0.6;"></p>
-    <hr style="border:0; border-top:1px solid rgba(255,255,255,0.1); margin:20px 0;">
-    <p id="m-desc"></p>
-    <button onclick="closeModal()" style="background:var(--primary); border:none; padding:10px 25px; border-radius:10px; cursor:pointer; font-weight:800; margin-top:20px;">CHIUDI</button>
+    <h2 id="m-nome" style="color:var(--primary); font-size: 2rem; margin: 0;"></h2>
+    <p id="m-ruolo" style="text-transform: uppercase; font-weight: 800; opacity: 0.5; font-size: 0.8rem; margin-bottom: 20px;"></p>
+    <p id="m-desc" style="line-height: 1.6;"></p>
+    <button class="btn-close" onclick="closeModal()">CHIUDI</button>
 </div>
 
 <script>
